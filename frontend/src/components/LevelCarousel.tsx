@@ -116,7 +116,7 @@ export default function LevelCarousel({ island, onClose }: LevelCarouselProps) {
             dragConstraints={{ left: -(island.levels.length - 1) * 160, right: 0 }}
             dragElastic={0.2}
             style={{ x: springX }}
-            onDragStart={() => setDragStart(x.get())}
+            onDragStart={() => {}}
             onDragEnd={handleDragEnd}
             whileDrag={{ cursor: 'grabbing' }}
           >
@@ -153,4 +153,3 @@ export default function LevelCarousel({ island, onClose }: LevelCarouselProps) {
     </motion.div>
   );
 }
-

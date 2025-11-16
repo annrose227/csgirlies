@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 interface WorldCardProps {
   title: string;
@@ -10,7 +10,12 @@ interface WorldCardProps {
   index: number;
 }
 
-export default function WorldCard({ title, description, color, icon, index }: WorldCardProps) {
+export default function WorldCard({
+  title,
+  description,
+  icon,
+  index,
+}: WorldCardProps) {
   const navigate = useNavigate();
 
   const handleEnter = () => {
@@ -29,14 +34,14 @@ export default function WorldCard({ title, description, color, icon, index }: Wo
       <div className="flex items-start justify-between mb-4">
         <div className="text-4xl">{icon}</div>
         <motion.div
-          animate={{ 
+          animate={{
             rotate: [0, 10, -10, 0],
-            scale: [1, 1.2, 1]
+            scale: [1, 1.2, 1],
           }}
-          transition={{ 
+          transition={{
             duration: 2,
             repeat: Infinity,
-            repeatDelay: 1
+            repeatDelay: 1,
           }}
         >
           <Sparkles className="w-6 h-6 text-pink-400" />
@@ -59,4 +64,3 @@ export default function WorldCard({ title, description, color, icon, index }: Wo
     </motion.div>
   );
 }
-

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Trophy, Coins, TrendingUp, Sparkles } from 'lucide-react';
+import { ArrowLeft, Trophy, Coins, TrendingUp } from 'lucide-react';
 import CandyQuizCard from '@/components/CandyQuizCard';
 import { aiClient, type QuizQuestion } from '@/utils/aiClient';
 import { db } from '@/utils/firebaseConfig';
-import { collection, doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 export default function QuizPage() {
   const [searchParams] = useSearchParams();

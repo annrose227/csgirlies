@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { Level } from '@/data/islandData';
-import { Lock, Sparkles } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Level } from "@/data/islandData";
+import { Lock } from "lucide-react";
 
 interface ProgressGlobeProps {
   level: Level;
@@ -8,10 +8,14 @@ interface ProgressGlobeProps {
   onClick: () => void;
 }
 
-export default function ProgressGlobe({ level, themeColors, onClick }: ProgressGlobeProps) {
+export default function ProgressGlobe({
+  level,
+  themeColors,
+  onClick,
+}: ProgressGlobeProps) {
   const isCompleted = level.progress >= 1;
   const circumference = 2 * Math.PI * 40; // radius = 40
-  const offset = circumference - (level.progress * circumference);
+  const offset = circumference - level.progress * circumference;
 
   return (
     <motion.div
@@ -28,29 +32,34 @@ export default function ProgressGlobe({ level, themeColors, onClick }: ProgressG
             backdrop-blur-md border-4
             flex items-center justify-center
             overflow-hidden
-            ${level.locked 
-              ? 'bg-gray-200/30 border-gray-400/50 grayscale' 
-              : isCompleted
-              ? 'bg-gradient-to-br from-yellow-200/40 to-orange-200/40 border-yellow-400/70'
-              : 'bg-white/20 border-white/50'
+            ${
+              level.locked
+                ? "bg-gray-200/30 border-gray-400/50 grayscale"
+                : isCompleted
+                ? "bg-gradient-to-br from-yellow-200/40 to-orange-200/40 border-yellow-400/70"
+                : "bg-white/20 border-white/50"
             }
           `}
           style={{
             boxShadow: level.locked
-              ? 'inset 0 0 20px rgba(0,0,0,0.2)'
+              ? "inset 0 0 20px rgba(0,0,0,0.2)"
               : `0 0 30px ${themeColors[0]}60, inset 0 0 20px ${themeColors[1]}30`,
           }}
-          animate={!level.locked ? {
-            boxShadow: [
-              `0 0 30px ${themeColors[0]}60`,
-              `0 0 40px ${themeColors[0]}80`,
-              `0 0 30px ${themeColors[0]}60`
-            ]
-          } : {}}
+          animate={
+            !level.locked
+              ? {
+                  boxShadow: [
+                    `0 0 30px ${themeColors[0]}60`,
+                    `0 0 40px ${themeColors[0]}80`,
+                    `0 0 30px ${themeColors[0]}60`,
+                  ],
+                }
+              : {}
+          }
           transition={{
             duration: 2,
             repeat: !level.locked ? Infinity : 0,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           {/* Frosted blur for locked */}
@@ -157,15 +166,17 @@ export default function ProgressGlobe({ level, themeColors, onClick }: ProgressG
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <p className={`
+          <p
+            className={`
             text-xs font-bold text-center whitespace-nowrap truncate
-            ${level.locked ? 'text-gray-500' : 'text-white'}
+            ${level.locked ? "text-gray-500" : "text-white"}
           `}
-          style={{
-            textShadow: level.locked 
-              ? 'none' 
-              : `0 0 8px ${themeColors[0]}, 0 2px 4px rgba(0,0,0,0.3)`,
-          }}>
+            style={{
+              textShadow: level.locked
+                ? "none"
+                : `0 0 8px ${themeColors[0]}, 0 2px 4px rgba(0,0,0,0.3)`,
+            }}
+          >
             {level.title}
           </p>
         </motion.div>
@@ -173,4 +184,3 @@ export default function ProgressGlobe({ level, themeColors, onClick }: ProgressG
     </motion.div>
   );
 }
-

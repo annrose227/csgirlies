@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { Island } from '@/data/islandData';
-import SidekickCharacter from './SidekickCharacter';
+import { motion } from "framer-motion";
+import { Island } from "@/data/islandData";
+import SidekickCharacter from "./SidekickCharacter";
 
 interface IslandCardProps {
   island: Island;
@@ -8,8 +8,12 @@ interface IslandCardProps {
   onClick: () => void;
 }
 
-export default function IslandCard({ island, index, onClick }: IslandCardProps) {
-  const completedLevels = island.levels.filter(l => l.progress >= 1).length;
+export default function IslandCard({
+  island,
+  index,
+  onClick,
+}: IslandCardProps) {
+  const completedLevels = island.levels.filter((l) => l.progress >= 1).length;
   const totalLevels = island.levels.length;
   const progress = completedLevels / totalLevels;
 
@@ -34,13 +38,13 @@ export default function IslandCard({ island, index, onClick }: IslandCardProps) 
           boxShadow: [
             `0 10px 40px ${island.themeColors[0]}40`,
             `0 15px 50px ${island.themeColors[0]}60`,
-            `0 10px 40px ${island.themeColors[0]}40`
-          ]
+            `0 10px 40px ${island.themeColors[0]}40`,
+          ],
         }}
         transition={{
           duration: 3,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
       >
         {/* Glow Background */}
@@ -56,7 +60,8 @@ export default function IslandCard({ island, index, onClick }: IslandCardProps) 
           {/* Header with Sidekick */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center"
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center"
                 style={{
                   background: `linear-gradient(135deg, ${island.themeColors[0]}50, ${island.themeColors[1]}50)`,
                   boxShadow: `0 0 20px ${island.themeColors[0]}60`,
@@ -72,9 +77,7 @@ export default function IslandCard({ island, index, onClick }: IslandCardProps) 
                 <h3 className="text-xl font-bold text-white drop-shadow-lg">
                   {island.name}
                 </h3>
-                <p className="text-sm text-white/80">
-                  {island.sidekick.name}
-                </p>
+                <p className="text-sm text-white/80">{island.sidekick.name}</p>
               </div>
             </div>
           </div>
@@ -83,7 +86,9 @@ export default function IslandCard({ island, index, onClick }: IslandCardProps) 
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm font-semibold text-white">Progress</span>
-              <span className="text-sm text-white/90">{completedLevels}/{totalLevels} Levels</span>
+              <span className="text-sm text-white/90">
+                {completedLevels}/{totalLevels} Levels
+              </span>
             </div>
             <div className="h-3 bg-white/20 rounded-full overflow-hidden">
               <motion.div
@@ -100,27 +105,31 @@ export default function IslandCard({ island, index, onClick }: IslandCardProps) 
 
           {/* Levels List */}
           <div className="space-y-2">
-            <span className="text-xs font-semibold text-white/90 block mb-2">Levels:</span>
+            <span className="text-xs font-semibold text-white/90 block mb-2">
+              Levels:
+            </span>
             <div className="space-y-1.5 max-h-32 overflow-y-auto">
-              {island.levels.map((level, i) => (
+              {island.levels.map((level) => (
                 <div
                   key={level.id}
                   className="flex items-center space-x-2 text-xs"
                 >
                   <div
                     className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                      level.locked 
-                        ? 'bg-white/20' 
-                        : level.progress >= 1 
-                        ? 'bg-green-400' 
-                        : 'bg-white/60'
+                      level.locked
+                        ? "bg-white/20"
+                        : level.progress >= 1
+                        ? "bg-green-400"
+                        : "bg-white/60"
                     }`}
                   />
-                  <span className={`flex-1 ${
-                    level.locked 
-                      ? 'text-white/50 line-through' 
-                      : 'text-white/90'
-                  }`}>
+                  <span
+                    className={`flex-1 ${
+                      level.locked
+                        ? "text-white/50 line-through"
+                        : "text-white/90"
+                    }`}
+                  >
                     {level.title}
                   </span>
                   {level.progress > 0 && level.progress < 1 && (
@@ -143,7 +152,9 @@ export default function IslandCard({ island, index, onClick }: IslandCardProps) 
               left: `${20 + i * 25}%`,
               top: `${15 + (i % 2) * 30}%`,
               background: island.themeColors[i % island.themeColors.length],
-              boxShadow: `0 0 8px ${island.themeColors[i % island.themeColors.length]}`,
+              boxShadow: `0 0 8px ${
+                island.themeColors[i % island.themeColors.length]
+              }`,
             }}
             animate={{
               opacity: [0, 1, 0],

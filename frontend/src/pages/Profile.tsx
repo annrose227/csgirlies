@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { User, Trophy, Coins, TrendingUp, Sparkles } from 'lucide-react';
+import { Trophy, Coins, TrendingUp, Sparkles } from 'lucide-react';
 import AvatarDressUp from '@/components/AvatarDressUp';
-import { db } from '@/utils/firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
 
 interface Sticker {
   id: string;

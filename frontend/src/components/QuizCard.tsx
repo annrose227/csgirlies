@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, XCircle, Sparkles, Coins, TrendingUp } from 'lucide-react';
+import { CheckCircle2, XCircle, Sparkles } from 'lucide-react';
 import { type QuizQuestion } from '@/utils/aiClient';
 import { cn } from '@/utils/cn';
 

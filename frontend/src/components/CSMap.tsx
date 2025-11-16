@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import MapNode from './MapNode';
-import Path from './Path';
-import { mapData, type World } from '@/data/mapData';
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import MapNode from "./MapNode";
+import Path from "./Path";
+import { mapData } from "@/data/mapData";
 
 export default function CSMap() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   // Smooth spring animations for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -31,36 +31,38 @@ export default function CSMap() {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
-      
+
       const rect = containerRef.current.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width - 0.5) * 100;
       const y = ((e.clientY - rect.top) / rect.height - 0.5) * 100;
-      
+
       mouseX.set(x);
       mouseY.set(y);
       setMousePosition({ x, y });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
   // Flatten all nodes from all worlds
-  const allNodes = mapData.flatMap(world => world.nodes);
+  const allNodes = mapData.flatMap((world) => world.nodes);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative w-full h-[700px] overflow-hidden rounded-3xl border-4 border-pink-200/50"
       style={{
-        background: 'linear-gradient(135deg, #FFDCEB 0%, #DDEBFF 50%, #EBD8FF 100%)',
+        background:
+          "linear-gradient(135deg, #FFDCEB 0%, #DDEBFF 50%, #EBD8FF 100%)",
       }}
     >
       {/* Layer 1: Background Sky with Sparkles */}
       <motion.div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at top, #FFDCEB 0%, #DDEBFF 50%, #EBD8FF 100%)',
+          background:
+            "radial-gradient(ellipse at top, #FFDCEB 0%, #DDEBFF 50%, #EBD8FF 100%)",
           x: bgX,
           y: bgY,
         }}
@@ -73,8 +75,9 @@ export default function CSMap() {
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              background: 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)',
-              boxShadow: '0 0 4px rgba(255,255,255,0.6)',
+              background:
+                "radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)",
+              boxShadow: "0 0 4px rgba(255,255,255,0.6)",
             }}
             animate={{
               opacity: [0, 0.6, 0],
@@ -257,9 +260,9 @@ export default function CSMap() {
         <motion.div
           className="absolute text-6xl opacity-70"
           style={{
-            left: '50%',
-            top: '60%',
-            transform: 'translateX(-50%)',
+            left: "50%",
+            top: "60%",
+            transform: "translateX(-50%)",
           }}
           animate={{
             y: [0, -3, 0],
@@ -285,7 +288,7 @@ export default function CSMap() {
         {mapData.map((world) =>
           world.nodes.map((node) => {
             if (node.next) {
-              const nextNode = world.nodes.find(n => n.id === node.next);
+              const nextNode = world.nodes.find((n) => n.id === node.next);
               if (nextNode) {
                 return (
                   <Path
@@ -319,9 +322,9 @@ export default function CSMap() {
               style={{
                 left: `${node.x}%`,
                 top: `${node.y}%`,
-                width: '140px',
-                height: '70px',
-                transform: 'translate(-50%, -50%)',
+                width: "140px",
+                height: "70px",
+                transform: "translate(-50%, -50%)",
                 background: `linear-gradient(135deg, ${world.color}80, ${world.color}40)`,
                 border: `3px solid ${world.color}`,
                 boxShadow: `0 8px 32px ${world.color}60`,
@@ -344,22 +347,19 @@ export default function CSMap() {
 
       {/* Map Nodes (on top of everything) */}
       <div className="absolute inset-0 z-10">
-        {allNodes.map((node) => {
-          const world = mapData.find(w => w.nodes.some(n => n.id === node.id));
-          return (
-            <MapNode
-              key={node.id}
-              id={node.id}
-              title={node.title}
-              icon={node.icon}
-              x={node.x}
-              y={node.y}
-              candyType={node.candyType}
-              unlocked={node.unlocked}
-              completed={node.completed}
-            />
-          );
-        })}
+        {allNodes.map((node) => (
+          <MapNode
+            key={node.id}
+            id={node.id}
+            title={node.title}
+            icon={node.icon}
+            x={node.x}
+            y={node.y}
+            candyType={node.candyType}
+            unlocked={node.unlocked}
+            completed={node.completed}
+          />
+        ))}
       </div>
 
       {/* Floating Sparkles (top layer) */}
@@ -371,8 +371,10 @@ export default function CSMap() {
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              background: 'radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,182,193,0.6) 50%, transparent 100%)',
-              boxShadow: '0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,182,193,0.6)',
+              background:
+                "radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,182,193,0.6) 50%, transparent 100%)",
+              boxShadow:
+                "0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,182,193,0.6)",
             }}
             animate={{
               opacity: [0, 1, 0],

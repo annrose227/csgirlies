@@ -1,15 +1,15 @@
-import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Home, BookOpen, Trophy, User, Sparkles } from 'lucide-react';
-import { cn } from '@/utils/cn';
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Home, BookOpen, User, Sparkles } from "lucide-react";
+import { cn } from "@/utils/cn";
 
 export default function Navbar() {
   const location = useLocation();
 
   const navItems = [
-    { path: '/', label: 'Home', icon: Home },
-    { path: '/worlds', label: 'Worlds', icon: BookOpen },
-    { path: '/profile', label: 'Profile', icon: User },
+    { path: "/", label: "Home", icon: Home },
+    { path: "/worlds", label: "Worlds", icon: BookOpen },
+    { path: "/profile", label: "Profile", icon: User },
   ];
 
   return (
@@ -36,7 +36,7 @@ export default function Navbar() {
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
-              
+
               return (
                 <Link
                   key={item.path}
@@ -59,4 +59,3 @@ export default function Navbar() {
     </motion.nav>
   );
 }
-

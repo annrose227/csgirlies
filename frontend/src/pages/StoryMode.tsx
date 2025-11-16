@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, BookOpen, Sparkles, FileText } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Sparkles, FileText } from 'lucide-react';
 import StoryGenerator from '@/components/StoryGenerator';
 import { type LessonResult } from '@/utils/aiClient';
 
