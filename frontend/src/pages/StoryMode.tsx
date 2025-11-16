@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Sparkles, FileText } from 'lucide-react';
 import StoryGenerator from '@/components/StoryGenerator';
 import { type LessonResult } from '@/utils/aiClient';
 
@@ -9,6 +9,7 @@ export default function StoryMode() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const world = searchParams.get('world') || 'Unknown World';
+  const levelId = searchParams.get('level') || '';
   const [lesson, setLesson] = useState<LessonResult | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [showQuizButton, setShowQuizButton] = useState(false);
@@ -73,7 +74,22 @@ export default function StoryMode() {
                   {world}
                 </h1>
               </div>
-              <p className="text-gray-600">Choose your learning style and generate a personalized storybook!</p>
+              <p className="text-gray-600 mb-4">Choose your learning style and generate a personalized storybook!</p>
+              
+              {/* Documentation Button */}
+              {levelId && (
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate(`/documentation?level=${levelId}`)}
+                  className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-bold shadow-lg shadow-blue-200/60 hover:shadow-blue-300/80 transition-all mb-6"
+                >
+                  <FileText className="w-5 h-5" />
+                  <span>View Documentation & Notes</span>
+                </motion.button>
+              )}
             </motion.div>
             <StoryGenerator topic={world} onLessonGenerated={handleLessonGenerated} />
           </div>
@@ -96,9 +112,22 @@ export default function StoryMode() {
                     <div className="inline-block text-6xl mb-2">
                       {['📖', '🎨', '🎭'][currentPage % 3]}
                     </div>
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-3">
                       {world} Storybook
                     </h2>
+                    
+                    {/* Documentation Button in Storybook */}
+                    {levelId && (
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => navigate(`/documentation?level=${levelId}`)}
+                        className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-400 to-cyan-400 text-white text-sm font-medium shadow-lg"
+                      >
+                        <FileText className="w-4 h-4" />
+                        <span>View Notes</span>
+                      </motion.button>
+                    )}
                   </motion.div>
 
                   {/* Page Content */}

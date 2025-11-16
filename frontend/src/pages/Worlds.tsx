@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import CSMap from '@/components/CSMap';
+import IslandMap from '@/components/IslandMap';
 
 export default function Worlds() {
   return (
@@ -11,14 +11,14 @@ export default function Worlds() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-            🗺️ CS Learning Map
+            🗺️ LearnVerse Island Map
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore floating islands of knowledge! Click on any candy node to begin your learning adventure.
+            Explore floating islands of knowledge! Click on any island to see its levels and begin your learning adventure.
           </p>
         </motion.div>
 
-        <CSMap />
+        <IslandMap />
       </div>
     </div>
   );

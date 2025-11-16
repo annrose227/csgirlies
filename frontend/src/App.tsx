@@ -5,6 +5,7 @@ import Worlds from './pages/Worlds';
 import StoryMode from './pages/StoryMode';
 import QuizPage from './pages/QuizPage';
 import Profile from './pages/Profile';
+import Documentation from './pages/Documentation';
 import './styles/girly-theme.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/story-mode" element={<StoryMode />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/documentation" element={<Documentation />} />
         </Routes>
       </div>
     </Router>
